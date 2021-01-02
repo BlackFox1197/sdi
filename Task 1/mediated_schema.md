@@ -1,3 +1,3 @@
 # Mediated Schema
 
-![Idee](images/Bildschirmfoto1)
+![Idee](images/Bildschirmfoto1.png)
