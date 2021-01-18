@@ -1,0 +1,13 @@
+t2 
+1 mediated schema and s1 and s2 -> all attributes
+compare attribute ms and data sources (which)
+for compare 
+
+3 similiaritz matric:
+distance
+jaro
+jacard
+COmbine the 3 -> use min, max and average (so whats better min, max or average)
+				-> 3 matrixes
+
+only computation between mediated and data source
