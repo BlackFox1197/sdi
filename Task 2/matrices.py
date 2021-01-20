@@ -17,21 +17,21 @@ log.write("Maximum length of an datasource attribute: " + str(maxLength))
 
 # Computing Edit-Distance-Matrix
 lev=np.zeros((len(mediated), len(datasource)))
-for wordI in range (0, len(mediated)):
-	for wordJ in range (0, len(datasource)):
-		lev[wordI, wordJ] = 1 - nltk.edit_distance(mediated[wordI], datasource[wordJ]) / maxLength
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		lev[med, data] = 1 - nltk.edit_distance(mediated[med], datasource[data]) / maxLength
 
 # Logging Edit-Distance-Matrix
 log.write("\n\nEdit-Distance-Matrix: \n")
 log.write("[")
-for wordI in range (0, len(mediated)):
+for med in range (0, len(mediated)):
 	log.write("(")
-	for wordJ in range (0, len(datasource)):
-		log.write("" + str(lev[wordI, wordJ]))
-		if wordJ != (len(datasource) - 1):
+	for data in range (0, len(datasource)):
+		log.write("" + str(lev[med, data]))
+		if data != (len(datasource) - 1):
 			log.write(", ")
 	log.write(")")
-	if wordI != (len(mediated) - 1):
+	if med != (len(mediated) - 1):
 		log.write("),\n")
 	else:
 		log.write("]")
@@ -39,107 +39,141 @@ for wordI in range (0, len(mediated)):
 
 # Computing Jaro-Matrix
 jaro=np.zeros((len(mediated), len(datasource)))
-for wordI in range (0, len(mediated)):
-	for wordJ in range (0, len(datasource)):
-		jaro[wordI, wordJ] = jaro_similarity(mediated[wordI], datasource[wordJ])
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		jaro[med, data] = jaro_similarity(mediated[med], datasource[data])
 
 # Logging Jaro-Matrix
 log.write("\n\nJaro-Matrix: \n")
 log.write("[")
-for wordI in range (0, len(mediated)):
+for med in range (0, len(mediated)):
 	log.write("(")
-	for wordJ in range (0, len(datasource)):
-		log.write("" + str(jaro[wordI, wordJ]))
-		if wordJ != (len(datasource) - 1):
+	for data in range (0, len(datasource)):
+		log.write("" + str(jaro[med, data]))
+		if data != (len(datasource) - 1):
 			log.write(", ")
 	log.write(")")
-	if wordI != (len(mediated) - 1):
+	if med != (len(mediated) - 1):
 		log.write("),\n")
 	else:
 		log.write("]")
 
 # Computing Jaccard-Matrix
 jaccard=np.zeros((len(mediated), len(datasource)))
-for wordI in range (0, len(mediated)):
-	for wordJ in range (0, len(datasource)):
-		jaccard[wordI, wordJ] = nltk.jaccard_distance(set(mediated[wordI]), set(datasource[wordJ]))
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		jaccard[med, data] = nltk.jaccard_distance(set(mediated[med]), set(datasource[data]))
 
 # Logging Jaccard-Matrix
 log.write("\n\nJaccard-Matrix: \n")
 log.write("[")
-for wordI in range (0, len(mediated)):
+for med in range (0, len(mediated)):
 	log.write("(")
-	for wordJ in range (0, len(datasource)):
-		log.write("" + str(jaccard[wordI, wordJ]))
-		if wordJ != (len(datasource) - 1):
+	for data in range (0, len(datasource)):
+		log.write("" + str(jaccard[med, data]))
+		if data != (len(datasource) - 1):
 			log.write(", ")
 	log.write(")")
-	if wordI != (len(mediated) - 1):
+	if med != (len(mediated) - 1):
 		log.write("),\n")
 	else:
 		log.write("]")
 
 # Computing Minimum-Combined-Matrix
 minimum=np.zeros((len(mediated), len(datasource)))
-for wordI in range (0, len(mediated)):
-	for wordJ in range (0, len(datasource)):
-		minimum[wordI, wordJ] = min(lev[wordI, wordJ], jaro[wordI, wordJ], jaccard[wordI, wordJ])
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		minimum[med, data] = min(lev[med, data], jaro[med, data], jaccard[med, data])
 
 # Logging Minimum-Combined-Matrix
 log.write("\n\nMinimum-Combined-Matrix: \n")
 log.write("[")
-for wordI in range (0, len(mediated)):
+for med in range (0, len(mediated)):
 	log.write("(")
-	for wordJ in range (0, len(datasource)):
-		log.write("" + str(minimum[wordI, wordJ]))
-		if wordJ != (len(datasource) - 1):
+	for data in range (0, len(datasource)):
+		log.write("" + str(minimum[med, data]))
+		if data != (len(datasource) - 1):
 			log.write(", ")
 	log.write(")")
-	if wordI != (len(mediated) - 1):
+	if med != (len(mediated) - 1):
 		log.write("),\n")
 	else:
 		log.write("]")
 
 # Computing Maximum-Combined-Matrix
 maximum=np.zeros((len(mediated), len(datasource)))
-for wordI in range (0, len(mediated)):
-	for wordJ in range (0, len(datasource)):
-		maximum[wordI, wordJ] = max(lev[wordI, wordJ], jaro[wordI, wordJ], jaccard[wordI, wordJ])
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		maximum[med, data] = max(lev[med, data], jaro[med, data], jaccard[med, data])
 
 # Logging Maximum-Combined-Matrix
 log.write("\n\nMaximum-Combined-Matrix: \n")
 log.write("[")
-for wordI in range (0, len(mediated)):
+for med in range (0, len(mediated)):
 	log.write("(")
-	for wordJ in range (0, len(datasource)):
-		log.write("" + str(maximum[wordI, wordJ]))
-		if wordJ != (len(datasource) - 1):
+	for data in range (0, len(datasource)):
+		log.write("" + str(maximum[med, data]))
+		if data != (len(datasource) - 1):
 			log.write(", ")
 	log.write(")")
-	if wordI != (len(mediated) - 1):
+	if med != (len(mediated) - 1):
 		log.write("),\n")
 	else:
 		log.write("]")
 
 # Computing Average-Combined-Matrix
 average=np.zeros((len(mediated), len(datasource)))
-for wordI in range (0, len(mediated)):
-	for wordJ in range (0, len(datasource)):
-		average[wordI, wordJ] = np.mean([lev[wordI, wordJ], jaro[wordI, wordJ], jaccard[wordI, wordJ]])
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		average[med, data] = np.mean([lev[med, data], jaro[med, data], jaccard[med, data]])
 
 # Logging Average-Combined-Matrix
 log.write("\n\nAverage-Combined-Matrix: \n")
 log.write("[")
-for wordI in range (0, len(mediated)):
+for med in range (0, len(mediated)):
 	log.write("(")
-	for wordJ in range (0, len(datasource)):
-		log.write("" + str(average[wordI, wordJ]))
-		if wordJ != (len(datasource) - 1):
+	for data in range (0, len(datasource)):
+		log.write("" + str(average[med, data]))
+		if data != (len(datasource) - 1):
 			log.write(", ")
 	log.write(")")
-	if wordI != (len(mediated) - 1):
+	if med != (len(mediated) - 1):
 		log.write("),\n")
 	else:
 		log.write("]")
 
+# Computing schema matching by tresholding (0.5) for minimum combination
+log.write("\n\nSchema matching for minimum combination strategy by tresholding with value 0.5")
+
+# Initialization of some required variables
+treshold = 0.5
+medKeys = []
+dataKeys = []
+dataValues = []
+minZeroFive = minimum
+
+# Finding of pairings which accept the treshold constraint
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if minZeroFive[med, data] >= treshold:
+			medKeys.append(med)
+			dataKeys.append(data)
+			dataValues.append(minZeroFive[med, data])
+
+# Preparation for visualization of the schema matching result
+medKeys = np.array(medKeys)
+dataKeys = np.array(dataKeys)
+dataValues = np.array(dataValues)
+currMedKey = -1
+
+# Visualition of the schema matching result
+for i in range (0, len(medKeys)):
+	if currMedKey != medKeys[i]:
+		log.write("\n" + str(mediated[medKeys[i]])+": ")
+		currMedKey = medKeys[i]
+	else:
+		log.write(", ")
+	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
+
+# Closing the log file - Done~
 log.close
