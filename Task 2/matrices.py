@@ -6,7 +6,7 @@ mediated = ["UID", "name", "CCInfo", "PID", "OID", "OID", "UID", "orderNumber", 
 
 s1s2 = ["SOPID", "PizzaName", "nurishment", "total", "CID", "PIID", "FirstName", "LastName", "PIID", "CreditCardNumber", "ccv", "expDate", "OID", "CID", "orderCode", "totalAmount", "Adress", "PID", "OID", "PID", "title", "nurishment", "price", "UID", "FirstName", "LastName", "CCNumber", "ccv", "expDate", "OID", "UID", "orderNumber", "Sum", "AID", "OID", "PID", "AID", "User", "street", "city", "zip"]
 
-log = open("matrixLog.txt", "w")
+log = open("Task 2/matrixLog.txt", "w")
 
 # Computing Edit-Distance-Matrix
 lev=np.zeros((len(mediated), len(s1s2)))
