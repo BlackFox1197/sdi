@@ -150,15 +150,78 @@ treshold = 0.5
 medKeys = []
 dataKeys = []
 dataValues = []
-minZeroFive = minimum
 
 # Finding of pairings which accept the treshold constraint
 for med in range (0, len(mediated)):
 	for data in range (0, len(datasource)):
-		if minZeroFive[med, data] >= treshold:
+		if minimum[med, data] >= treshold:
 			medKeys.append(med)
 			dataKeys.append(data)
-			dataValues.append(minZeroFive[med, data])
+			dataValues.append(minimum[med, data])
+
+# Preparation for visualization of the schema matching result
+medKeys = np.array(medKeys)
+dataKeys = np.array(dataKeys)
+dataValues = np.array(dataValues)
+currMedKey = -1
+
+# Visualition of the schema matching result
+for i in range (0, len(medKeys)):
+	if currMedKey != medKeys[i]:
+		log.write("\n" + str(mediated[medKeys[i]])+": ")
+		currMedKey = medKeys[i]
+	else:
+		log.write(", ")
+	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
+
+# Computing schema matching by tresholding (0.5) for maximumx combination
+log.write("\n\nSchema matching for maximum combination strategy by tresholding with value 0.5")
+
+# Initialization of some required variables
+treshold = 0.5
+medKeys = []
+dataKeys = []
+dataValues = []
+
+# Finding of pairings which accept the treshold constraint
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if maximum[med, data] >= treshold:
+			medKeys.append(med)
+			dataKeys.append(data)
+			dataValues.append(maximum[med, data])
+
+# Preparation for visualization of the schema matching result
+medKeys = np.array(medKeys)
+dataKeys = np.array(dataKeys)
+dataValues = np.array(dataValues)
+currMedKey = -1
+
+# Visualition of the schema matching result
+for i in range (0, len(medKeys)):
+	if currMedKey != medKeys[i]:
+		log.write("\n" + str(mediated[medKeys[i]])+": ")
+		currMedKey = medKeys[i]
+	else:
+		log.write(", ")
+	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
+
+# Computing schema matching by tresholding (0.5) for minimum combination
+log.write("\n\nSchema matching for average combination strategy by tresholding with value 0.5")
+
+# Initialization of some required variables
+treshold = 0.5
+medKeys = []
+dataKeys = []
+dataValues = []
+
+# Finding of pairings which accept the treshold constraint
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if average[med, data] >= treshold:
+			medKeys.append(med)
+			dataKeys.append(data)
+			dataValues.append(average[med, data])
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
