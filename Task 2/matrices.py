@@ -8,17 +8,11 @@ datasource = ["SOPID", "PizzaName", "nurishment", "total", "CID", "PIID", "First
 
 log = open("Task 2/matrixLog.txt", "w")
 
-# Computing the length datasource attribute with the most characters
-maxLength = 0
-for i in range (0, len(datasource)):
-	if maxLength < len(datasource[i]):
-		maxLength = len(datasource[i])
-log.write("Maximum length of an datasource attribute: " + str(maxLength))
-
 # Computing Edit-Distance-Matrix
 lev=np.zeros((len(mediated), len(datasource)))
 for med in range (0, len(mediated)):
 	for data in range (0, len(datasource)):
+		maxLength = max([len(mediated[med]), len(datasource[data])])
 		lev[med, data] = 1 - nltk.edit_distance(mediated[med], datasource[data]) / maxLength
 
 # Logging Edit-Distance-Matrix
