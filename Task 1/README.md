@@ -13,7 +13,7 @@ The description of all used datasources.
 * User(UID, FirstName, LastName, CCNumber, ccv, expDate)
 * Order(OID, UID, orderNumber, Sum, AID)
 * InOrder(OID, PID)
-* Adress(AID, User, street, city, zip)
+* Adress(AID, UID, street, city, zip)
 
 # CQ
 * getTotalAmountFromUser(name, totalAmount):- User(UID, name), Order(UID, totalAmount)
@@ -29,11 +29,24 @@ The description of all used datasources.
 * Pizza(PID, pizzaName, nutrition, price) 
 
 # Heterogenities
-* CreditCardNumber, ccv, expDate in User is CCInfo in mediated
+S1 to mediated Schema:
+* CreditCardNumber, ccv, expDate in PaymentInfos is CCInfo in mediated
+* first and last name in Customer is name in mediated
+S2 to mediated Schema:
 * first and last name in User is name in mediated
 * street, city, zip in Adress is adress in mediated
 
+
 # Homogenities
-* title in Pizza is pizzaName in mediated
-* sum in order is totalAmount in mediated
+S1 to mediated Schema:
+* StoneOvenPizza Class is Pizza Class in mediated 
+* Customer Class is User Class in medited
 * nurishment in Pizza is nutrition in mediated
+* total in Pizza is price in mediated
+* totalAmount in order is totalCost in mediated
+* orderCode in order is orderNumber in mediated
+S2 to mediated Schema:
+* InOrder Class is OrderItem Class in mediated 
+* nurishment in Pizza is nutrition in mediated
+* sum in order is totalCost in mediated
+* titel in Pizza is pizzaName in mediated
