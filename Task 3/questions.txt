@@ -1,0 +1,3 @@
+Fragen für den Prof:
+    - Zuordnung der Attribute wischen Mediated Schema und Datenquellen
+    - Task 3 - Inhalte abgrenzen
