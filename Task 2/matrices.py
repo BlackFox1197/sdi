@@ -580,12 +580,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -617,12 +617,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -654,12 +654,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -691,12 +691,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -728,12 +728,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -765,12 +765,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -802,12 +802,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -839,12 +839,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
@@ -876,12 +876,12 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-if truepositive != 0 and falsepositive != 0:
+if truepositive != 0 or falsepositive != 0:
 	recall = truepositive / (truepositive + falsepositive)
 else:
 	recall = 0
 log.write("\nRecall: " + str(recall))
-if truepositive != 0 and falsenegative != 0:
+if truepositive != 0 or falsenegative != 0:
 	precision = truepositive / (truepositive + falsenegative)
 else:
 	precision = 0
