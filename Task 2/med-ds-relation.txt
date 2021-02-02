@@ -1,20 +1,20 @@
-User:
-    UID         - S1.Customer.CID, S2.User.UID
-    name        - S1.Customer.FirstName, S1.Customer.LastName, S2.User.FirstName, S2.User.LastName
-    CCInfo      - S1.PaymentInfos.CreditCardNumber, S1.PaymentInfos.ccv, S1.PaymentInfos.expDate
-                  S2.User.CCNumber, S2.User.ccv, S2.User.expDate
-OrderItem:
-    PID         - S1.OrderItem.PID, S2.InOrder.PID
-    OID         - S1.OrderItem.OID, S2.InOrder.OID
++User:
++    UID         - S1.Customer.CID, S2.User.UID
++    name        - S1.Customer.FirstName, S1.Customer.LastName, S2.User.FirstName, S2.User.LastName
++    CCInfo      - S1.PaymentInfos.CreditCardNumber, S1.PaymentInfos.ccv, S1.PaymentInfos.expDate
++                  S2.User.CCNumber, S2.User.ccv, S2.User.expDate
++OrderItem:
++    PID         - S1.OrderItem.PID, S2.InOrder.PID
++    OID         - S1.OrderItem.OID, S2.InOrder.OID
 Order:
-    OID         - S1.Order.OID, S1.Order.OID
-    UID         - S1.Order.CID, S2.Order.UID
-    orderNumber - S1.Order.orderCode, S2.Order.orderNumer
-    totalCost   - S1.Order.totalAmount, S2.Order.Sum
-    Adress      - S1.Order.Adress,
-                  S2.Adress.street, S2.Adress.city, S2.Adress.zip
++    OID         - S1.Order.OID, S1.Order.OID
++    UID         - S1.Order.CID, S2.Order.UID
++    orderNumber - S1.Order.orderCode, S2.Order.orderNumer
++    totalCost   - S1.Order.totalAmount, S2.Order.Sum
++    Adress      - S1.Order.Adress,
++                  S2.Adress.street, S2.Adress.city, S2.Adress.zip
 Pizza:
-    PID         - S1.StoneOvenPizza.SOPID, S2.Pizza.PID
-    pizzaName   - S1.StoneOvenPizza.PizzaName, S2.Pizza.title
-    nutrition   - S1.StoneOvenPizza.nurishment, S2.Pizza.nurishment
++    PID         - S1.StoneOvenPizza.SOPID, S2.Pizza.PID
++    pizzaName   - S1.StoneOvenPizza.PizzaName, S2.Pizza.title
++    nutrition   - S1.StoneOvenPizza.nurishment, S2.Pizza.nurishment
     price       - S1.StoneOvenPizza.total, S2.Pizza.price

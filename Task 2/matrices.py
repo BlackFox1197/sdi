@@ -3,13 +3,101 @@ from nltk.metrics.distance import jaro_similarity
 import numpy as np
 
 # Defining mediated and datasource attributes
+log = open("sdi/Task 2/matrixLog.txt", "w")
 mediated = ["UID", "name", "CCInfo", "PID", "OID", "OID", "UID", "orderNumber", "totalCost", "Adress", "PID", "pizzaName", "nutrition", "price"]
-datasource = ["SOPID", "PizzaName", "nurishment", "total", "CID", "PIID", "FirstName", "LastName", "PIID", "CreditCardNumber", "ccv", "expDate", "OID", "CID", "orderCode", "totalAmount", "Adress", "PID", "OID", "PID", "title", "nurishment", "price", "UID", "FirstName", "LastName", "CCNumber", "ccv", "expDate", "OID", "UID", "orderNumber", "Sum", "AID", "OID", "PID", "AID", "User", "street", "city", "zip"]
+datasource = ["SOPID", "PizzaName", "nurishment", "total", "CID", "PIID", "FirstName", "LastName", "PIID", "CreditCardNumber", "ccv", "expDate",
+"OID", "CID", "orderCode", "totalAmount", "Adress", "PID", "OID", "PID", "title", "nurishment", "price", "UID", "FirstName", "LastName", "CCNumber",
+"ccv", "expDate", "OID", "UID", "orderNumber", "Sum", "AID", "OID", "PID", "AID", "User", "street", "city", "zip"]
 
-# Defining schema matching solution for evaluation
-solution = np.zeros(len(mediated), len(datasource))
+# BEGIN - Defining schema matching solution for evaluation
+solutionPattern = np.zeros((len(mediated), len(datasource)))
 
-log = open("Task 2/matrixLog.txt", "w")
+# User - Adding UID-Matches
+matches = [4, 23]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[0, match] = 1
+
+# User - Adding name-Matches
+matches = [6, 7, 24, 25]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[1, match] = 1
+
+# User - Adding CCInfo-Matches
+matches = [10, 11, 12, 26, 27, 28]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[2, match] = 1
+
+# OrderItem - Adding PID-Matches
+matches = [17, 35]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[3, match] = 1
+
+# OrderItem - Adding OID-Matches
+matches = [18, 34]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[4, match] = 1
+
+# Order - Adding OID-Matches
+matches = [12, 29]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[5, match] = 1
+
+# Order - Adding UID-Matches
+matches = [13, 30]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[6, match] = 1
+
+# Order - Adding orderNumber-Matches
+matches = [14, 31]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[7, match] = 1
+
+# Order - Adding totalCost-Matches
+matches = [15, 32]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[8, match] = 1
+
+# Order - Adding Adress-Matches
+matches = [16, 38, 39, 40]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[9, match] = 1
+
+# Pizza - Adding PID-Matches
+matches = [0, 19]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[10, match] = 1
+
+# Pizza - Adding pizzaName-Matches
+matches = [1, 20]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[11, match] = 1
+
+# Pizza - Adding nutrition-Matches
+matches = [2, 21]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[12, match] = 1
+
+# Pizza - Adding price-Matches
+matches = [3, 22]
+for data in range(0, len(datasource)):
+	for match in matches:
+		solutionPattern[13, match] = 1
+
+# END - Defining schema matching solution for evaluation
+# BEGIN - Computing Matrizes
 
 # Computing Edit-Distance-Matrix
 lev=np.zeros((len(mediated), len(datasource)))
@@ -427,7 +515,7 @@ for i in range (0, len(medKeys)):
 		log.write(", ")
 	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
 
-# Computing schema matching by tresholding (0.7) for minimum combination
+# Computing schema matching by tresholding (0.7) for average combination
 log.write("\n\nSchema matching for average combination strategy by tresholding with value 0.7")
 
 # Initialization of some required variables
@@ -444,9 +532,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(average[med, data])
-			maxzeroseven[med, data] = 1
+			minzeroseven[med, data] = 1
 		else:
-			maxzeroseven[med, data] = 0
+			minzeroseven[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -463,5 +551,11 @@ for i in range (0, len(medKeys)):
 		log.write(", ")
 	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
 
+# END - Computing Matrizes
+# BEGIN - Computing Matrizes
+
+
+
+# END - Computing Matrizes
 # Closing the log file - Done~
 log.close
