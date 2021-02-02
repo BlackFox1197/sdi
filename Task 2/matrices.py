@@ -407,7 +407,7 @@ for i in range (0, len(medKeys)):
 		log.write(", ")
 	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
 
-# Computing schema matching by tresholding (0.3) for minimum combination
+# Computing schema matching by tresholding (0.3) for average combination
 log.write("\n\nSchema matching for average combination strategy by tresholding with value 0.3")
 
 # Initialization of some required variables
@@ -479,7 +479,7 @@ for i in range (0, len(medKeys)):
 		log.write(", ")
 	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
 
-# Computing schema matching by tresholding (0.7) for maximumx combination
+# Computing schema matching by tresholding (0.7) for maximum combination
 log.write("\n\nSchema matching for maximum combination strategy by tresholding with value 0.7")
 
 # Initialization of some required variables
@@ -532,9 +532,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(average[med, data])
-			minzeroseven[med, data] = 1
+			avgzeroseven[med, data] = 1
 		else:
-			minzeroseven[med, data] = 0
+			avgzeroseven[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -582,8 +582,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.5) and maximum combination
 log.write("\n\nEvaluation of schema matching with maximum combination strategy and tresholding by 0.5")
@@ -613,8 +613,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.5) and average combination
 log.write("\n\nEvaluation of schema matching with average combination strategy and tresholding by 0.5")
@@ -644,8 +644,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.3) and minimum combination
 log.write("\n\nEvaluation of schema matching with minimum combination strategy and tresholding by 0.3")
@@ -675,8 +675,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.3) and maximum combination
 log.write("\n\nEvaluation of schema matching with maximum combination strategy and tresholding by 0.3")
@@ -706,8 +706,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.3) and average combination
 log.write("\n\nEvaluation of schema matching with average combination strategy and tresholding by 0.3")
@@ -737,8 +737,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.7) and minimum combination
 log.write("\n\nEvaluation of schema matching with minimum combination strategy and tresholding by 0.7")
@@ -768,8 +768,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.7) and maximum combination
 log.write("\n\nEvaluation of schema matching with maximum combination strategy and tresholding by 0.7")
@@ -799,8 +799,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.7) and average combination
 log.write("\n\nEvaluation of schema matching with average combination strategy and tresholding by 0.7")
@@ -830,8 +830,8 @@ log.write("\nFP: " + str(falsepositive))
 
 recall = truepositive / (truepositive + falsepositive)
 precision = truepositive / (truepositive + falsenegative)
-log.write("\n Recall: " + str(recall))
-log.write("\n Precision: " + str(precision))
+log.write("\nRecall: " + str(recall))
+log.write("\nPrecision: " + str(precision))
 
 # END - Computing Matrizes
 # Closing the log file - Done~
