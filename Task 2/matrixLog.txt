@@ -232,3 +232,67 @@ FN: 15
 FP: 145
  Recall: 0.12650602409638553
  Precision: 0.5833333333333334
+
+Evaluation of schema matching with maximum combination strategy and tresholding by 0.5
+TP: 36
+TN: 0
+FN: 0
+FP: 538
+ Recall: 0.0627177700348432
+ Precision: 1.0
+
+Evaluation of schema matching with average combination strategy and tresholding by 0.5
+TP: 21
+TN: 393
+FN: 15
+FP: 145
+ Recall: 0.12650602409638553
+ Precision: 0.5833333333333334
+
+Evaluation of schema matching with minimum combination strategy and tresholding by 0.3
+TP: 21
+TN: 393
+FN: 15
+FP: 145
+ Recall: 0.12650602409638553
+ Precision: 0.5833333333333334
+
+Evaluation of schema matching with maximum combination strategy and tresholding by 0.3
+TP: 36
+TN: 0
+FN: 0
+FP: 538
+ Recall: 0.0627177700348432
+ Precision: 1.0
+
+Evaluation of schema matching with average combination strategy and tresholding by 0.3
+TP: 21
+TN: 393
+FN: 15
+FP: 145
+ Recall: 0.12650602409638553
+ Precision: 0.5833333333333334
+
+Evaluation of schema matching with minimum combination strategy and tresholding by 0.7
+TP: 21
+TN: 393
+FN: 15
+FP: 145
+ Recall: 0.12650602409638553
+ Precision: 0.5833333333333334
+
+Evaluation of schema matching with maximum combination strategy and tresholding by 0.7
+TP: 36
+TN: 0
+FN: 0
+FP: 538
+ Recall: 0.0627177700348432
+ Precision: 1.0
+
+Evaluation of schema matching with average combination strategy and tresholding by 0.7
+TP: 21
+TN: 393
+FN: 15
+FP: 145
+ Recall: 0.12650602409638553
+ Precision: 0.5833333333333334
