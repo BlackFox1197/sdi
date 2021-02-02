@@ -232,7 +232,7 @@ log.write("\n\nSchema matching for minimum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.5
-minzerofive = minimum
+minzerofive = np.copy(minimum)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -268,7 +268,7 @@ log.write("\n\nSchema matching for maximum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.5
-maxzerofive = maximum
+maxzerofive = np.copy(maximum)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -304,7 +304,7 @@ log.write("\n\nSchema matching for average combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.5
-avgzerofive = average
+avgzerofive = np.copy(average)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -340,7 +340,7 @@ log.write("\n\nSchema matching for minimum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.3
-minzerothree = minimum
+minzerothree = np.copy(minimum)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -376,7 +376,7 @@ log.write("\n\nSchema matching for maximum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.3
-maxzerothree = maximum
+maxzerothree = np.copy(maximum)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -412,7 +412,7 @@ log.write("\n\nSchema matching for average combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.3
-avgzerothree = average
+avgzerothree = np.copy(average)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -448,7 +448,7 @@ log.write("\n\nSchema matching for minimum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.7
-minzeroseven = minimum
+minzeroseven = np.copy(minimum)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -484,7 +484,7 @@ log.write("\n\nSchema matching for maximum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.7
-maxzeroseven = maximum
+maxzeroseven = np.copy(maximum)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -520,7 +520,7 @@ log.write("\n\nSchema matching for average combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.7
-avgzeroseven = average
+avgzeroseven = np.copy(average)
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -580,9 +580,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.5) and maximum combination
@@ -611,9 +617,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.5) and average combination
@@ -642,9 +654,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.3) and minimum combination
@@ -673,9 +691,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.3) and maximum combination
@@ -704,9 +728,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.3) and average combination
@@ -735,9 +765,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.7) and minimum combination
@@ -766,9 +802,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.7) and maximum combination
@@ -797,9 +839,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # Evaluation of schema matching with tresholding (0.7) and average combination
@@ -828,9 +876,15 @@ log.write("\nTN: " + str(truenegative))
 log.write("\nFN: " + str(falsenegative))
 log.write("\nFP: " + str(falsepositive))
 
-recall = truepositive / (truepositive + falsepositive)
-precision = truepositive / (truepositive + falsenegative)
+if truepositive != 0 and falsepositive != 0:
+	recall = truepositive / (truepositive + falsepositive)
+else:
+	recall = 0
 log.write("\nRecall: " + str(recall))
+if truepositive != 0 and falsenegative != 0:
+	precision = truepositive / (truepositive + falsenegative)
+else:
+	precision = 0
 log.write("\nPrecision: " + str(precision))
 
 # END - Computing Matrizes
