@@ -1,3 +1,3 @@
 Fragen für den Prof:
-    - Zuordnung der Attribute wischen Mediated Schema und Datenquellen
+    - Zuordnung der Attribute zwischen Mediated Schema und Datenquellen
     - Task 3 - Inhalte abgrenzen

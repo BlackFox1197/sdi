@@ -585,6 +585,68 @@ precision = truepositive / (truepositive + falsenegative)
 log.write("\n Recall: " + str(recall))
 log.write("\n Precision: " + str(precision))
 
+# Evaluation of schema matching with tresholding (0.5) and aximum combination
+log.write("\n\nEvaluation of schema matching with maximum combination strategy and tresholding by 0.5")
+
+truepositive = 0
+falsepositive = 0
+truenegative = 0
+falsenegative = 0
+
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if solutionPattern[med, data] == maxzerofive[med, data]:
+			if solutionPattern[med, data] == 1:
+				truepositive = truepositive + 1
+			else:
+				truenegative = truenegative + 1
+		else:
+			if solutionPattern[med, data] == 1:
+				falsenegative = falsenegative + 1
+			else:
+				falsepositive = falsepositive + 1
+
+log.write("\nTP: " + str(truepositive))
+log.write("\nTN: " + str(truenegative))
+log.write("\nFN: " + str(falsenegative))
+log.write("\nFP: " + str(falsepositive))
+
+recall = truepositive / (truepositive + falsepositive)
+precision = truepositive / (truepositive + falsenegative)
+log.write("\n Recall: " + str(recall))
+log.write("\n Precision: " + str(precision))
+
+# Evaluation of schema matching with tresholding (0.5) and average combination
+log.write("\n\nEvaluation of schema matching with average combination strategy and tresholding by 0.5")
+
+truepositive = 0
+falsepositive = 0
+truenegative = 0
+falsenegative = 0
+
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if solutionPattern[med, data] == avgzerofive[med, data]:
+			if solutionPattern[med, data] == 1:
+				truepositive = truepositive + 1
+			else:
+				truenegative = truenegative + 1
+		else:
+			if solutionPattern[med, data] == 1:
+				falsenegative = falsenegative + 1
+			else:
+				falsepositive = falsepositive + 1
+
+log.write("\nTP: " + str(truepositive))
+log.write("\nTN: " + str(truenegative))
+log.write("\nFN: " + str(falsenegative))
+log.write("\nFP: " + str(falsepositive))
+
+recall = truepositive / (truepositive + falsepositive)
+precision = truepositive / (truepositive + falsenegative)
+log.write("\n Recall: " + str(recall))
+log.write("\n Precision: " + str(precision))
+
 # END - Computing Matrizes
 # Closing the log file - Done~
 log.close
