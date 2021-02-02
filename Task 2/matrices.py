@@ -554,7 +554,36 @@ for i in range (0, len(medKeys)):
 # END - Computing Matrizes
 # BEGIN - Computing Matrizes
 
+# Evaluation of schema matching with tresholding (0.5) and minimum combination
+log.write("\n\nEvaluation of schema matching with minimum combination strategy and tresholding by 0.5")
 
+truepositive = 0
+falsepositive = 0
+truenegative = 0
+falsenegative = 0
+
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if solutionPattern[med, data] == minzerofive[med, data]:
+			if solutionPattern[med, data] == 1:
+				truepositive = truepositive + 1
+			else:
+				truenegative = truenegative + 1
+		else:
+			if solutionPattern[med, data] == 1:
+				falsenegative = falsenegative + 1
+			else:
+				falsepositive = falsepositive + 1
+
+log.write("\nTP: " + str(truepositive))
+log.write("\nTN: " + str(truenegative))
+log.write("\nFN: " + str(falsenegative))
+log.write("\nFP: " + str(falsepositive))
+
+recall = truepositive / (truepositive + falsepositive)
+precision = truepositive / (truepositive + falsenegative)
+log.write("\n Recall: " + str(recall))
+log.write("\n Precision: " + str(precision))
 
 # END - Computing Matrizes
 # Closing the log file - Done~
