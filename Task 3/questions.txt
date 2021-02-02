@@ -1,3 +1,8 @@
 Fragen für den Prof:
     - Zuordnung der Attribute zwischen Mediated Schema und Datenquellen
     - Task 3 - Inhalte abgrenzen
+        * Projektbezug?
+        * Rule-Based Matching
+        * Learned-Based Matching
+        * Bayes Network
+    - Projektabgabe (Wann, Wie Wo)?
