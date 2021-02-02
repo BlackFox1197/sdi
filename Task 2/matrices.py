@@ -141,6 +141,7 @@ log.write("\n\nSchema matching for minimum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.5
+minzerofive = minimum
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -152,6 +153,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(minimum[med, data])
+			minzerofive[med, data] = 1
+		else:
+			minzerofive[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -173,6 +177,7 @@ log.write("\n\nSchema matching for maximum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.5
+maxzerofive = maximum
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -184,6 +189,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(maximum[med, data])
+			maxzerofive[med, data] = 1
+		else:
+			maxzerofive[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -200,11 +208,12 @@ for i in range (0, len(medKeys)):
 		log.write(", ")
 	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
 
-# Computing schema matching by tresholding (0.5) for minimum combination
+# Computing schema matching by tresholding (0.5) for average combination
 log.write("\n\nSchema matching for average combination strategy by tresholding with value 0.5")
 
 # Initialization of some required variables
 treshold = 0.5
+avgzerofive = average
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -216,6 +225,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(average[med, data])
+			avgzerofive[med, data] = 1
+		else:
+			avgzerofive[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -237,6 +249,7 @@ log.write("\n\nSchema matching for minimum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.3
+minzerothree = minimum
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -248,6 +261,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(minimum[med, data])
+			minzerothree[med, data] = 1
+		else:
+			minzerothree[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -264,11 +280,12 @@ for i in range (0, len(medKeys)):
 		log.write(", ")
 	log.write(str(datasource[dataKeys[i]]) + "(" + str(dataValues[i]) + ")")
 
-# Computing schema matching by tresholding (0.3) for maximumx combination
+# Computing schema matching by tresholding (0.3) for maximum combination
 log.write("\n\nSchema matching for maximum combination strategy by tresholding with value 0.3")
 
 # Initialization of some required variables
 treshold = 0.3
+maxzerothree = maximum
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -280,6 +297,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(maximum[med, data])
+			maxzerothree[med, data] = 1
+		else:
+			maxzerothree[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -301,6 +321,7 @@ log.write("\n\nSchema matching for average combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.3
+avgzerothree = average
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -312,6 +333,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(average[med, data])
+			avgzerothree[med, data] = 1
+		else:
+			avgzerothree[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -333,6 +357,7 @@ log.write("\n\nSchema matching for minimum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.7
+minzeroseven = minimum
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -344,6 +369,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(minimum[med, data])
+			minzeroseven[med, data] = 1
+		else:
+			minzeroseven[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -365,6 +393,7 @@ log.write("\n\nSchema matching for maximum combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.7
+maxzeroseven = maximum
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -376,6 +405,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(maximum[med, data])
+			maxzeroseven[med, data] = 1
+		else:
+			maxzeroseven[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
@@ -397,6 +429,7 @@ log.write("\n\nSchema matching for average combination strategy by tresholding w
 
 # Initialization of some required variables
 treshold = 0.7
+avgzeroseven = average
 medKeys = []
 dataKeys = []
 dataValues = []
@@ -408,6 +441,9 @@ for med in range (0, len(mediated)):
 			medKeys.append(med)
 			dataKeys.append(data)
 			dataValues.append(average[med, data])
+			maxzeroseven[med, data] = 1
+		else:
+			maxzeroseven[med, data] = 0
 
 # Preparation for visualization of the schema matching result
 medKeys = np.array(medKeys)
