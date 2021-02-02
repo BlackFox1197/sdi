@@ -29,23 +29,23 @@ The description of all used datasources.
 * Pizza(PID, pizzaName, nutrition, price) 
 
 # Heterogenities
-S1 to mediated Schema:
+## S1 to mediated Schema:
 * CreditCardNumber, ccv, expDate in PaymentInfos is CCInfo in mediated
 * first and last name in Customer is name in mediated
-S2 to mediated Schema:
+## S2 to mediated Schema:
 * first and last name in User is name in mediated
 * street, city, zip in Adress is adress in mediated
 
 
 # Homogenities
-S1 to mediated Schema:
+## S1 to mediated Schema:
 * StoneOvenPizza Class is Pizza Class in mediated 
 * Customer Class is User Class in medited
 * nurishment in Pizza is nutrition in mediated
 * total in Pizza is price in mediated
 * totalAmount in order is totalCost in mediated
 * orderCode in order is orderNumber in mediated
-S2 to mediated Schema:
+## S2 to mediated Schema:
 * InOrder Class is OrderItem Class in mediated 
 * nurishment in Pizza is nutrition in mediated
 * sum in order is totalCost in mediated
