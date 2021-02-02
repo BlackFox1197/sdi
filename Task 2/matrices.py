@@ -585,7 +585,7 @@ precision = truepositive / (truepositive + falsenegative)
 log.write("\n Recall: " + str(recall))
 log.write("\n Precision: " + str(precision))
 
-# Evaluation of schema matching with tresholding (0.5) and aximum combination
+# Evaluation of schema matching with tresholding (0.5) and maximum combination
 log.write("\n\nEvaluation of schema matching with maximum combination strategy and tresholding by 0.5")
 
 truepositive = 0
@@ -627,6 +627,99 @@ falsenegative = 0
 for med in range (0, len(mediated)):
 	for data in range (0, len(datasource)):
 		if solutionPattern[med, data] == avgzerofive[med, data]:
+			if solutionPattern[med, data] == 1:
+				truepositive = truepositive + 1
+			else:
+				truenegative = truenegative + 1
+		else:
+			if solutionPattern[med, data] == 1:
+				falsenegative = falsenegative + 1
+			else:
+				falsepositive = falsepositive + 1
+
+log.write("\nTP: " + str(truepositive))
+log.write("\nTN: " + str(truenegative))
+log.write("\nFN: " + str(falsenegative))
+log.write("\nFP: " + str(falsepositive))
+
+recall = truepositive / (truepositive + falsepositive)
+precision = truepositive / (truepositive + falsenegative)
+log.write("\n Recall: " + str(recall))
+log.write("\n Precision: " + str(precision))
+
+# Evaluation of schema matching with tresholding (0.3) and minimum combination
+log.write("\n\nEvaluation of schema matching with minimum combination strategy and tresholding by 0.3")
+
+truepositive = 0
+falsepositive = 0
+truenegative = 0
+falsenegative = 0
+
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if solutionPattern[med, data] == minzerothree[med, data]:
+			if solutionPattern[med, data] == 1:
+				truepositive = truepositive + 1
+			else:
+				truenegative = truenegative + 1
+		else:
+			if solutionPattern[med, data] == 1:
+				falsenegative = falsenegative + 1
+			else:
+				falsepositive = falsepositive + 1
+
+log.write("\nTP: " + str(truepositive))
+log.write("\nTN: " + str(truenegative))
+log.write("\nFN: " + str(falsenegative))
+log.write("\nFP: " + str(falsepositive))
+
+recall = truepositive / (truepositive + falsepositive)
+precision = truepositive / (truepositive + falsenegative)
+log.write("\n Recall: " + str(recall))
+log.write("\n Precision: " + str(precision))
+
+# Evaluation of schema matching with tresholding (0.3) and maximum combination
+log.write("\n\nEvaluation of schema matching with maximum combination strategy and tresholding by 0.3")
+
+truepositive = 0
+falsepositive = 0
+truenegative = 0
+falsenegative = 0
+
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if solutionPattern[med, data] == maxzerothree[med, data]:
+			if solutionPattern[med, data] == 1:
+				truepositive = truepositive + 1
+			else:
+				truenegative = truenegative + 1
+		else:
+			if solutionPattern[med, data] == 1:
+				falsenegative = falsenegative + 1
+			else:
+				falsepositive = falsepositive + 1
+
+log.write("\nTP: " + str(truepositive))
+log.write("\nTN: " + str(truenegative))
+log.write("\nFN: " + str(falsenegative))
+log.write("\nFP: " + str(falsepositive))
+
+recall = truepositive / (truepositive + falsepositive)
+precision = truepositive / (truepositive + falsenegative)
+log.write("\n Recall: " + str(recall))
+log.write("\n Precision: " + str(precision))
+
+# Evaluation of schema matching with tresholding (0.3) and average combination
+log.write("\n\nEvaluation of schema matching with average combination strategy and tresholding by 0.3")
+
+truepositive = 0
+falsepositive = 0
+truenegative = 0
+falsenegative = 0
+
+for med in range (0, len(mediated)):
+	for data in range (0, len(datasource)):
+		if solutionPattern[med, data] == avgzerothree[med, data]:
 			if solutionPattern[med, data] == 1:
 				truepositive = truepositive + 1
 			else:
