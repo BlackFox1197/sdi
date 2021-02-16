@@ -1,0 +1,70 @@
+##### Notizen - Kapitel 3: Beschreibung von Datenquellen #####
+
+* Motivation:
+	-> Beschreibung von Datenquellen ermöglicht Datenintegrations-System zur
+		- Entscheidung relevanter Quellen für Anfrage
+		- Angemessener Zugriff auf Quellen
+		- Verbindung von Daten mehrerer Quellen
+		- Überwindung von Grenzen spezifischer Quellen
+		- Identifikation von Möglichkeiten effizienterer Anfrage-Auswertung
+	-> Quellenbeschreibungen als Formalismus zur Spezifizierung wichtiger Aspekte von Datenquellen
+* Schema-Heterogenität:
+	-> Versöhnung der Schema-Heterogenität als Ziel von Schema-Mappings (meist zwischen Mediated Schema und Datenquellen)
+		- Namen von Tabellen und Attributen
+		- Tabellarische Organisation des Schemas
+		- Inhaltliche Abdeckung des Schemas
+		- Repräsentation auf Daten-Ebene
+	-> Herausforderungen
+		- Mögliche Zugriffsmuster mittels benötigter Eingaben (z. B.: Web-Formulare, Web-Services); Verarbeitung komplexer Datenbank-Anfragen fraglich
+		- Vollständigkeit einer Quelle fraglich
+		- Verlässlichkeit, Ladebeschränkungen, gespiegelte Seiten, etc.
+* Schema-Mapping-Sprachen:
+	-> Prinzipien
+		- Beschreibung der Beziehung zwischen Quelle und Ziel bzw. zwischen Mediated Schema und Datenquellen
+		- Beschreibung mittels Relationen, in denen Instanzen des Mediated Schema konsistent mit aktueller Instanz der Datenquelle ist
+	-> Eindeutige Ergebnisse nur bei sicheren Antworten möglich
+		- Unsichere Antworten durch fehlende Informationen für Relation in allen möglichen Instanzen des Mediated Schema
+		- Sichere Antworten wenn sie in allen Instanzen des Mediated Schema konsistent mit Instanzen aller Quellen und dem Mapping M ist
+	-> Merkmal
+		- Flexibilität					Möglichkeit des Ausdrucks von Beziehungen zwischen echten Schemata
+		- Effiziente Umformulierung		Berechenbare Komplexität der Umformulierung und Suche nach Antworten
+		- Einfache Aktualisierung		Einfaches Hinzufügen und Entfernen von Quellen
+	-> Global-as-View
+		- Definition des Mediated Schemas als Reihe von Views über Datenquellen
+		- Eine Reihe von Ausdrücken der Form Gi(-X-) hat als Teilmenge Q(-S-)
+			# Gi als Relation im Mediated Schema
+			# Q(-S-) als Anfrage über Datenquellen
+		- Umformulierung in GAV mittels Rückgabe der bestmöglichen Anfrage der Datenquellen (mithilfe gegebener Anfrage Q auf Mediated Schema)
+			# Gi in g als Reihe von Reihen zur Auswertung von Qi auf den Quellen
+			# Gi in g als gleich der Auswertung von Qi auf den Quellen
+		- Sehr einfache Umformulierung in polynomieller Zeit´und Anfrageantworten
+		- GAV drängt alles in das Mediated Schema und kann dadurch keine Änderungen der Tabellenorganisation erfassen
+		- Sichere Antworten, solange ein Attribut in jeder Quelle enthalten ist
+	-> Local-as-View
+		- Definition der Datenquellen als Views über Mediated Schema
+		- Reihe von Ausdrücken der Form Si(-X-) als Teilmenge von Qi(G)
+			# Si(-X-) als Quellenrelation
+			# Qi(G) als Anfrage über Mediated Schema
+		- Impliziert Reihe möglicher Datenbanken für Mediated Schema
+		- Verwendung anderer Tupel in der Instanz des Mediated Schema bei unvollständigen Quellen
+		- Umformulierung mittels gegebener Tupel der Quellen ausgedrückt als Views
+			# Mediated Schema enthält keine Tupel und erhält Anfrage
+			# Antwort der Anfrage unter Verwendung der Views
+		- Algorithmen zur Umformulierung mittels Verwendung der Views zum Beantworten von Anfragen arbeiten in Praxis gut
+		- Garantiertes Finden sicherer Antworten unter bestimmten Bedingungen
+		- Ausdruck unvollständiger Informationen mittels LAV
+			# In GAV nur eine einzige Instanz konsistent mit Quellen
+		- LAV kann jedoch mit internen Schlüsseln nicht umgehen
+	-> GLAV
+		- Q^S(-X-) als Teilmenge von Q^G(-X-)
+			# Q^G als Anfrage über Mediated Schema
+			# Q^S als Anfrage über Datenquellen
+		- Umformulierung zu Q`mittels Verwendung der Views Q1^G, Q2^G, ...
+			# Erzeugung von Q`` mittels Ersetzung von Qi^G -> Qi^S
+			# Unfolding der Qi^S
+* Beschränkungen von Zugriffsmustern:
+	-> Datenzugriff meist über spezifische Formulare
+		- Web-Formulare benötigen bestimmte Eingaben
+		- Web-Services benötigen Schnittstellen-Definitionen
+		- Kontrolliertes Laden des Systems durch Erlauben bestimmter Typen von Anfragen
+	-> Modellgrenzen benötigen zusätzliche Ausschmückung: Binden des ersten Arguments

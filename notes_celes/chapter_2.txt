@@ -1,0 +1,81 @@
+##### Notizen - Kapitel 2: Manipulierung von Anfrageausdrücken #####
+
+* Grundlegende Datenbankkonzepte:
+	-> Datenunabhängigkeit
+		- Änderungen auf logischer Schema-Ebene benötigen keine Änderung der Anwendung basierend auf Struktur (Logische Datenunabhängigkeit)
+		- Änderungen auf physischer Schema-Ebene benötigen keine Änderungen am logischen Schema
+	-> Notation
+		- Zustand (Instanz) einer Datenbank D
+		- Attribute beginend mit Alphabet (A,B,C) mit Listen von Attributen als -A-
+		- Relationen mit Buchstaben R, S,T und Reihe von Relationen T
+		- Tupel mit Kleinbuchstaben s, t, etc.
+	-> Integritätsbeschränkungen zur Beschreibung gültiger Tupel einer Relation (z. B.: Primärschlüssel, Fremdschlüssel, Wertebereiche, etc.)
+		- Schlüssel als Reihe von Spalten die eindeutig eine Zeile einer Datenbank berechnen
+		- Funktionale Abhängigkeiten (Reihe von Attributen A berechnen funktional Reihe von Attributen B, wenn t1 und t2 den Werten von A zustimmen, auch bei B)
+	-> Relationale Algebra als Reihe von Operationen zur Schließung über den Relationen
+		- Eine oder mehrere Operationen als Eingabe eines Operators
+		- Relationen als Ausgabe eines Operatros
+		- Unterscheidung zwischen primitiven und nicht-primitiven Operatoren
+	-> SQL (Structured Query Language) als deklarative Sprache zur Beschreibung angefordert Anfrage-Ergebnisse
+		- Realisierung relationaler Operatoren (inklusive besprochener Unstimmigkeiten)
+		- SELECT-FROM-WHERE-Block als Basisform
+		- Q(D) als Reihe resultierender Spalten durch Anwendung der Abfrage Q auf der Datenbank D
+	-> Konjunktive Abfragen als einfachste Form von Abfragen als Ausdrücke über einer Datenbank
+		- Repräsentation aus logischer Perspektive unter Verwendung der Datalog-Notation
+		- Q(-X-):- R1(-X1-), R2(-X2-), ..., Rn(-Xn-), c1, ..., cm
+		- -X- als Kopf-Variable; -Xi- als existenzielle Variable, cj als Atome zur konkreten Filterung/Auswertung
+		- Jede Relation des Abfrage-Körpers als konjunktives Unterziel
+		- Erscheinung einer jeden Kopf-Variable in mindestens einem positiven Unterziel
+		- Verschiedene Regelm mit selbem Kopf-Prädikat als Ausdruck einer Vereinigung
+* Query unfolding (Anfrageentfaltung):
+	-> Schreiben von Abfragen mit Verweisen auf Views (benannte Abfragen) im Körper als Kompositionalität (Vorteil deklarativer Sprachen)
+	-> Query composition (Abfragezusammenstellung) als wichtiger Mechanismus zum Schreiben komplexer Abfragen
+	-> Query unfolding als Prozess des Rückgängig machens der Zusammenstellung von Abfragen (z. B.: Umschreiben von Views zu Verweisen auf Datenbanktabellen)
+		- Wichtig für Vergeliche zwischen Abfrageausdrücken mit Views
+		- Wichtig für Abfrageoptimierung (Untersuchung aller möglichen Join-Reihenfolgen)
+		- Entfaltung kann Unerfüllbarkeit der Zusammenstellung zweier erfüllbaren Abfragen entdecken
+	-> Algorithmus
+		- Suche nach Unterzielen p(X1, ..., Xn), sodass p nach Regel r definiert ist
+		- Vereinigung von p(...) mit Kopf von r
+		- Ersetzung von p(...) mit Ergebnissen der Verenigung in den Unterzielen
+		- Iteration bis keine Vereinigungen mehr gefunden werden können
+		- Erzeugung von n Regeln für jedes r, wenn p als Vereinigung von r1, ..., rn definiert ist
+	-> Nicht unbedingte Erzeugung effizienterer Abfragen
+	-> Exponentielles Wachstum der resultierenden Anfragegröße
+* Anfragebegrenzung und -äquivalenz:
+	-> Formale Begründung und Ermittlung von Relationen zwischen Anfragen
+		- Äquivalenz und Implikation als Eigenschaften von Anfragen und nicht von Datenbanken
+		- Anfragen als echte bzw. unechte Teilmengen anderer Anfragen
+	-> Implikation als Vergleich zwischen durch Ansichten beschriebene Quellen
+		- Entfernung redundanter Unterziele zur effizienteren Auswertung
+		- Mapping als Antwort, wenn die Unterziele des Anfragekörpers zu den Tupeln in D passen
+		- Q1 enthält Q2, genau dann wenn ein Implikations-Mapping von Q1 zu Q2 existiert (Äquivalenz NP-complete)
+	-> Variablen-Mapping als Bedingung auf variablen Zuordnungen, die Implikation garantieren
+	-> Repräsentative (kanonische) Datenbanken als einzelne Datenbanken zum Anbieten von Gegenbeispielen, falls solche existieren
+	-> Implikations-Ergebnisse fallen in eine der beiden Klassen
+* Beantwortung von Anfragen unter Verwendung von Ansichten:
+	-> Problemdefinition
+		- Eingabe: Anfrage Q mit View-Definitionen V1, ..., Vn
+		- Umschreiben zu Anfrage Q`, der nur auf Views und interpretierte Prädikate verweist
+		- Äquivalentes Umschreiben unter Verwendung von V1, ..., Vn, sodass Q` <=> Q
+	-> Maximal-enthaltendes Umschreiben
+		- Eingabe: Anfrage Q, Umschreiben der Abfragesprache L, View-Definitionen V1, ..., Vn
+		- Q` als maximal-enthaltenes Umschreiben von Q gegeben durch V1, ..., Vn und L, wenn:
+			1. Q` element von L
+			2. Q` als Teilmenge von Q
+			3. Kein Q`` in L, sodass Q`` Teilmenge von Q und Q` Teilmenge von Q``
+	-> Verwendungszwecke
+		- LAV-style Datenintegragion benötigt Maximal-enthaltendes Umschreiben
+		- Anfrageoptimierung benötigt äquivalentes Umschreiben; implementiert in mesiten kommerziellen DBMS
+		- Physikalisches Datenbank-Design beschreibt Speicherstrukturen als Views
+	-> View-basiertes Anfrageantworten
+		- Parametrisierung maximal-enthaltender Umschreibungen mittels Anfragesprache
+		- Sichere Antworten als Mechanismus zur Bereitstellung formaler Antworten
+		- Mehrere Datenbanken können View-Definition erfüllen
+		- Entstehung von Unsicherheiten bei Beantwortung der Anfragen
+		- Sichere Antworten sind in allen Datenbanken wahr und konsistent in Views und ihren Erweiterungen
+	-> MiniCon- und Inverse-Rules-Algorithmen zur Erzeugung sicherer Antworten
+		- Annahme keiner interpretierbaren Prädikate in Abfrage (in View kein Problem)
+		- Open-World-Assumption
+		- Erzeugung maximal-enthaltender Umschreibung als logische Folge
+		- Bei Closed-World-Assumptions Suche nach allen sicheren Antworten co-NP hard

@@ -1,0 +1,106 @@
+##### Notizen - Kapitel 4: String-Matching #####
+
+* Motivation:
+	-> Suche nach Zeichenketten die auf die gleiche Echtwelt-Entität verweisen
+		- Unterschiede in konkreter Repräsentation möglich
+		- Kritischer Faktor in vielen Aufgaben der Datenintegration (Schema-Matching, Data-Matching, Informationsextraktion)
+	-> Definition des String-Matching-Problems
+	-> Definition üblicher Ähnlichkeitsmaße
+	-> Anwendung der Messer über große Anzahl an Zeichenketten
+* Problembeschreibung:
+	-> Gegebene Reihe von Zeichenketten X und Y
+		- Finde alle Paare aus X und Y, die auf die gleiche Echtwelt-Entität verweisen
+		- (x,y) als Match
+	-> Genauigkeit als Herausforderung
+		- Schreibweise und optische Zeichenerkennung
+		- Unterschiedliche Zeichensätze
+		- Abkürzungen oder Weglassen bestimmter Teile
+		- Unterschiedliche Namen bzw. Spitznamen
+		- Vermischung von Teilen der Zeichenkette
+	-> Verwendung eines Ähnlichkeitsmaßes als Lösung
+		- s(x,y) element von [0,1]
+		- Je höher der Wert, umso ähnlicher sind die Zeichenketten
+		- Verwendung von Distanzmaßen ebenfalls möglich (kleine Werte für höhere Ähnlichkeit)
+	-> Skalierbarkeit als Herausforderung
+		- Anwendung von s(x,y) über alle Paare unpraktische aufgrund quadratischer Laufzeit
+		- Anwendung von s(x,y) über meist versprechendste Paare über Methode FindCands als Lösung
+			# Verwende für jede Zeichenkette von x die FindCands-Methode um alle Kandidaten aus Y zu finden
+			# Führe auf den gefundenen Kandidaten von Y s(x,y) aus
+* Sequenz-basierte Ähnlichkeitsmaße:
+	-> Edit-Distance (Levensthein-Distanz)
+		- Berechnung von d(x,y) als minimale Kosten zur Transformation von x zu y unter Verwendung einer Sequenz von Operatoren, die jeweils 1 kosten
+		- Operatoren zum Löschen/Einfügen/Ersetzen von Zeichen
+		- Konvertierung in Ähnlichkeitsmaß mittels s(x,y) = 1 - d(x,y) / max(length(x),length(y))
+	-> Needleman-Wunch-Maß als Verallgemeinerung der Levensthein-Edit-Distanz
+		- Definition einer Ausrichtung zwischen x und y mit Zuweisung einer Wertung zur Ausrichtung
+		- Rückgabe der Ausrichtung mit höchster Wertung
+		- Ausrichtung als Reihe von Übereinstimmungen zwischen Zeichen von x und y bei Erlauben von Lücken
+		- Verwendung einer Wertungs-Matrix und Lückenstrafen
+		- Alignment-Score = Summe aller Übereinstimmungen - Summe aller Strafen durch Lücken
+			# Berechnung von Ähnlichkeitsmaßen anstatt von Distanzwerten
+			# Verallgemeinert Edit-Kosten zu Wertungs-Matrix
+			# Ermöglichung verfeinerter Wertungsmodelle
+		- Verallgemeinerung von Einfügen und Entfernen von Lücken mit Verallgemeinerung dieser Kosten von 1 zu Cg
+	-> Affine-Gap-Maß als Erweiterung von Needleman-Wunch zum verbesserten Umgang mit Lücken
+		- Needleman-Wunch bei großen Lücken nicht gut angepasst (unfaire Strafen langer Lücken, da Lücken meist größer als 1 sind)
+		- Definition der Kosten für Öffnen einer Lücke und Weiterführen einer Lücke als Lösung
+	-> Smith-Waterman-Maß
+		- Vorherige Maße für globale Ausrichtungen (Betrachtung aller Zeichen von x und y)
+			# Ähnlichkeitsmaß für generell starke Abweichungen sehr niedrig
+		- Finden von Teilketten von x und y mit starker Ähnlichkeit als Lösung
+		- Verwendung einer lokalen Ausrichtung
+		- Grundidee
+			# Suche der besten lokalen Ausrichtung zwischen x und y mit Ausgabe seiner Wertung als Gesamtwertung
+			# Neustart der Suche an jedem Punkt der Zeichenketten
+			# Nach Berechnung der Matrix Verwendung einer Wiederholungsgleichung mittels Rückverfolgung der Pfeile des höchsten Wertes der Matrix
+	-> Jaro-Maß hauptsächlich zum Vergleich kurzer Zeichenketten
+		- Suche aller gemeinsamen Zeichen xi und yi sodas xi = yi mit |i-j| <= min(|x|,|y|) / 2
+		- Gemeinsame Zeichen identische und von der Position sehr nah beeinander
+		- Transposition wenn i-tes gemeinsames Zeichen von x nicht dem von y gleicht
+		- jaro(x,y) = 1 / 3 * (c / |x| + c / |y| + (c - t / 2) / c) mit c als Anzahl gleicher Zeichen und t als Anzahl der Transpositionen
+	-> Jaro-Winkler-Maß für Zeichenketten mit niedriger Jaro-Wertung aber gleichem Präfix
+		- jaro-winkler(x,y) = (1 - PL * PW) * jaro(x,y) + PL * PW
+		- PL als Länge des des längsten gemeinsamen Präfixes
+		- PW als gegebenes Gewicht für den Präfix
+* Reihen-basierte Ähnlichkeitsmaße:
+	-> Darstellung von Zeichenketten als Reihen von Zeichen
+		- Verwendung Reihen-bezogener Eigenschaften zur Berechnung von Ähnlichkeitswerten
+		- Prüfung von durch Freiraum getrennten Wörtern oder Prüfung durch Aufteilen in Teilketten gleicher Länge (z. B.: Dave in ##d, #da, dav, ave, ve#, e##)
+	-> Überlappungsmaß
+		- Erzeugung von Teilketten für X und Y
+		- Berechnung gleicher Teilketten (Schnittmenge)
+	-> Jaccard-Maß
+		- Berechnung als Schnittmenge / Vereinigungsmenge
+	-> TF/IDF-Maß (Term Frequencies and Inverse Document Frequencies)
+		- Zeichenketten ähnlich, sofern sie charaktersierende Terme enthalten
+		- x und y aus einer Sammlung von Zeichenketten
+		- Konvertierung von Zeichenketten zu Bag of Terms bezeichnet als Dokument
+		- Definition der Term-Frequenz tf(t, D) = Anzahl des Auftretens des Terms t im Dokument D
+		- Definition inverser Dokumenten-Frequenz idf(t) = N / Nd (Anzahl an Dokumenten der Sammlung geteilt durch Anzahl der Dokumente, die t enthalten)
+		- Konvertierung eines jeden Dokuments d in Merkmalsvektoren vd mit vd(t) als Merkmal für jeden Term t (z. B.: vd(t) = tf(t,d) * idf(t))
+		- Ähnlichkeitsmaß zweier Zeichenketten p und q  über Merkmalsvektoren vp und vq im |T|-dimensionalen Raum, wo jede Dimension zu einem Term gehört
+		- Wertung als Cosinus über Winkel der Merkmalsvektoren
+			# Hohe Wertung bei Teilen viele häufig verwendeter Terme
+			# Solange Terme nicht häufig in anderen Zeichenketten vorkommen
+			# Normalisierung der Merkmalsvektoren
+* Hybride Ähnlichkeitsmaße:
+	-> Verallgemeinertes Jaccard-Maß
+		- Identische Überlappung als zu beschränkend in bestimmten Fällen
+		- Weiches Überlappen zwischen Teilketten mittels Anwendung eines Ähnlichkeitsmaßes für Teilausdrücke
+			# Erzeugung eines bipartiten Graphen G über Ähnlichkeitsmaße ab einem bestimmten Schwellwert
+			# Suche nach maximalen Gewicht in G
+			# Rückgabe des normalisierten Gewichts von M als verallgemeinerten Jaccard-Wert
+	-> Weiches TF/IDF-Maß ähnlich zu Jaccard, außer dass TF/IDF-Maß als High-Level Ähnlichkeitsmaß verwendet wird
+* Hochskalierung des String-Matchings:
+	-> Invertierter Index über Zeichenketten
+		- Konvertierung jeder Zeichenkette in Dokumente mit Erzeugung eines invertierten Index darüber
+		- Verwendung des Index, um schnell Dokumente zu finden, die den Term t enthalten
+		- Sehr große invertierte Liste mit hohen Kosten zur Erzeugung und Veränderung
+		- Benötigung einer Aufzählung aller Paare von Zeichenketten, die mindestens einen Term teilen
+	-> Größenfilterung zum Abruf von Zeichenketten deren Größe sie zu möglichen Kandidaten macht
+	-> Präfix-Filterung zur Prüfung des Überlappungsmaßes von Teilketten unter Verwendung von invertierten Indizes zur Suche aller Überlappungen
+	-> Intelligente Auswahl der Teilketten
+		- Prüfung von nur einem Stück der Teilketten
+		- Sortierung aller möglichen Terme sowie der Zeichenketten in x und y
+		- Zuordnung der ersten n Terme von x als Präfix der Größe n von x
+		- Überprüfung der Überlappung mittels dieser berechneten Werte

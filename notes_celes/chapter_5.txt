@@ -1,0 +1,124 @@
+##### Notizen - Kapitel 5: Schema-Matching und -Mapping #####
+
+* Überblick:
+	-> Semantisches Mapping als Anfrageausdruck bezogen auf Schema S mit Schema T
+	-> Beschreibung der Relationen des Mediated Schemas als Anfragen über Quellen in GAV
+		- Erzeugung semantischer Mappings für jede relevante Quelle
+		- GAV-Beschreibung der Tabelle des Mediated Schemas als UNION aller Mappings relevanter Quellen
+	-> Erzeugung semantischer Mappings zur Spezifizierung der Rückgabe von Tupeln aus Mediated Schema für jede Tabelle relevanter Quellen in LAV
+	-> Erzeugung semantischer Mappings in beide Richtungen in GLAV
+	-> Semantische Matches als Reihe von Elementen aus Schema S für eine Reihe von Elementen aus Schema T
+		- Ohne detaillierte Spezifikation der konkreten Art von Beziehung
+		- 1-zu-1-Matches, 1-zu-n-Matches oder m-zu-n-Matches
+	-> Definition semantischer Matches zur Transformation in Anfragen semantischen Mappings
+	-> Matching und Mapping muss Heterogenität zwischen Schemata absichern
+		- Unterschiedliche Namensgebung von Tabellen und Attributen
+		- Beziehung zwischen mehreren Attributen eines Schema mit einem Attribut des anderen Schema
+		- Unterschiedliche tabellarische Organisation der Schemata (z. B.: unterschiedliche Anzahl an Tabellen zur Abstraktion des gleichen Kontexts)
+		- Inhaltliche Abdeckung und Grad des Details unterschiedlich
+	-> Verwendung mehrerer Heuristiken und Arten von Informationen zur Maximierung der Genauigkeit des Matchings
+		- Eingabe: Matches; Ausgabe: Aktuelles Mapping
+		- Suche nach Tupeln der einen Quelle zur Transformation und Kombination für die Erzeugung von Tupeln der anderen Quelle
+* Matcher:
+	-> Verwendung einer Ähnlichkeitsmatrix als Schema für Schema-Mapping
+		- Eingabe: Zwei Schemata T und S sowie alle möglichen Zusatzinformationen (Dateninstanzen, Textbeschreibungen)
+		- Ausgabe: Ähnlichkeitsmatrix mit Zuweisungen für jedes Paar aus S und T in [0,1] zur Abschätzung des Matchings
+	-> Namensbasierte Matcher
+		- Verwendung von Techniken des String-Matchings (z. B.: Edit-Distance, Jaccard, Soundex, etc.)
+		- Meist Vorverarbeitung der Namen (Aufteilung in Wörter, Erweiterung von Abkürzungen, Erweiterung um Synonyme, Entfernung von Stopp-Wörtern)
+	-> Instanzbasierte Matcher
+		- Begleitung von Schemas durch Dateninstanzen extrem hilfreich bei Entscheidung von Matches
+		- Entwicklung vieler populärer Ansätze
+		- Erkenner				Verwendung von Wörterbüchern, regulären Ausdrücken, einfachen Regeln zur Erkennung von Datenwerten bestimmter Arten von Attributen
+								z. B.: Länder, Städte, Personennamen, Farben, Codes, Gene, Proteine
+		- Überlappungs-Matcher	Untersuchung der Überlappung von Werten zwischen Attributen (z. B.: Jaccard-Maß)
+		- Klassifikatoren		Verwendung von Lernverfahren
+* Verbindung von Match-Vorhersagen:
+	-> Combiner als Vereiniger von Ähnlichkeitsmatrizen der Matcher zu einer einzigen Matrix
+	-> Rückgabe des Durchschnitts, Minimums, oder Maximums von Werten als einfachste Art von Combinern
+	-> Auswahl des Combiners fraglich
+		- Durchschnitt wenn man keinen Grund hat einem Matcher mehr zu Vertrauen als einem anderen
+		- Maximum wenn einem starken Signal eines Matchers vertraut wird
+		- Minimum als konservativere Variante
+	-> Komplexere Arten von Kombiner
+		- unter Verwendung handgeschriebener Skripte
+		- unter Verwendung gewichteter Summen für jeden Matcher (Lernen durch Trainingsdaten; Kombination der Gewichte z. B. durch lineare/logistische Regression)
+		- als Lernverfahren selber, welches lernt die Werte der Matcher zu kombinieren (Entscheidungsbaum, logistische Regression, etc.)
+* Integritätsbeschränkungen von Domänen:
+	-> Designer verfügen über Wissen, was als Integritätsbeschränkungen von Domänen ausgedrückt werden kann
+		- Beschränkungs-Durchführer nutzt Wissen zum Kürzen bestimmter Match-Kombinationen
+		- Durchläuft Suchraum aller durch den Combiner erzeugten Kombinationen
+		- Suche nach Kombinationen mit höchsten zusammengesetzten Wert (Vereinigung der Matching-Werte einer potenziellen Kombination), was Beschränkungen erfüllt
+		- Beginnend bei höchstem Wert bis hin zum niedrigsten, solange bis ein Wert die Bedingung erfüllt
+	-> Verwendung in Praxis ziemlich schwer aufgrund der Verarbeitung verschiedener Beschränkungen und der Möglichkeit einer effizienten Suche
+	-> Unterscheidung zwischen harten und weichen Beschränkungen
+		- Harte Beschränkungen müssen durchgeführt werden und keine Ausgabe darf dagegen verstoßen
+		- Weiche Beschränkungen in heuristischer Art, können evtl. dagegen verstoßen unter Minimierung des Grads der Verletzung der Beschränkung
+	-> Zuordnung jeder Beschränkung zu Kosten
+		- Für harte Beschränkungen immer unendlich
+		- Bei weichen Beschränkungen jede mögliche positive Zahl
+	-> Effiziente Entscheidung ob Kombination M eine Beschränkung c verletzt unter allen verfügbaren gegebenen Dateninstanzen des Schemas als Schlüsselanforderung
+	-> Wenn keine Verletzung erkannt wurde, muss der Enforcer nicht unbedingt warten; Daten könnten für Verifizierung nicht ausreichen
+	-> Suche im Raum der Match-Kombinationen
+		- Anpassung der A^*-Suche		Garantiertes Finden der optimalen Lösung, Berechnung jedoch sehr teuer
+		- Lokale Ausbreitung			Schneller, findet jedoch nur lokales Optimum
+	-> A^*-Suche für Finden eines Zielzustands in einer Reihe von Zuständen, beginnend vom Startzustand
+		- Zuweisung von Kosten für jeden Pfad im Graphen
+		- Suche nach billigsten Pfad vom Startzustand
+		- Best-First Suche mittels
+			# Erweiterung des Startzustands in Reihe von Folgezuständen
+			# Wahl des Pfads mit geringsten abgeschätzten Kosten
+			# Iterative Erweiterung, Kostenabschätzung und Auswahl bis zum Zielzustand
+		- Geschätzte Kosten eines Zustands f(n) = g(n) + h(n)
+			# g(n)	- Kosten des Pfades vom Startzustand zu n
+			# h(n)	- Untergrenze der Kosten von n zum Zielzustand
+			# f(n)	- Untergrenze der Kosten der billigsten Lösung über n
+		- Terminierung im Zielzustand mit Rückgabe des billigsten Pfads (garantiert, solange er existiert)
+	-> Anpassung von A^*
+		- Schema S1 und S2 mit A1, ..., An als Attribute von S1 und B1, ..., Bn als Attribute von S2
+		- Zustände als Tupel der Größe n mit i-ten Element des Tupels als Spezifikation des Matches für Ai
+		- Repräsentation unbestimmter Matches für Ai mittels Wildcard *
+		- Zustand abstrakt, wenn er Wildcards enthält, ansonsten konkret
+		- (*, *, ..., *) als Startzustand und beschreibt alle möglichen Match-Kombinationen
+		- Alle konkreten Zustände als Zielzustände
+		- Expandierung von Zuständen nur bei abstrakten möglich (Wahl eines * und Ersetzung durch alle möglichen Matches)
+		- Wahl des * als Schlüsselentscheidung
+		- Kosten des Zielzustands kombiniert aus Abschätzungen des Likelihoods der Kombinationen und dem Grad der Verletzung von Beschränkungen
+			# cost(M) = -LH(M) + cost(M, c1) + ... + cost(M, cp)
+			# LH(M) = likelihood von M bezogen auf Ähnlichkeitsmatrix = log(config(M))
+			# Abschätzung abstrakter Zustände mittels Approximation über unbekannte Wildcards
+* Match-Selektoren:
+	-> Wahl des Matches aus Ähnlichkeitsmatrix
+	-> Schwellwerte als einfachste Strategie
+		- Rückgabe von Attribut-Paaren als Matches, wenn Ähnlichkeitswert größer gleich Schwellwert ist
+		- Komplexere Verfahren gehören zu besten Kombinationsverfahren
+	-> Verwendung von Stable Marriage
+		- Elemente von S als Männer, von T als Frauen
+		- sim(i,j) als Grad wie sehr Ai und Bj nacheinander verlangen
+		- Suche nach stabilen Matches zwischen beiden Reihen
+* Neuverwendung vorheriger Matches:
+	-> Aufgaben des Schema-Matchings meist wiederholend (z. B.: Hinzufügen neuer Quellen im Mediated Schema)
+	-> Lernen anhand vorheriger Erfahrungen durch Verwendung von Techniken des maschinellen Lernens
+		- S1, ..., Sn als Quellen für das Mediated Schema G
+		- Manuelles matchen von S1, ..., Sm mit m << n
+		- Verallgemeinerung des Systems anhand der Matches zur Vorhersage von Sm+1, ..., Sn
+	-> Multi-Strategie Lernen zur Lösung des Problems
+		- Einsatz einer Reihe von Lernern L1, ..., Lk
+		- Jeder Lerner erzeugt einen Klassifikator für je ein Element e des Mediated Schema auf Grundlage der Trainingsbeispiele
+		- Ableitung von Trainingsbeispielen unter Verwendung semantischer Matches zwischen Trainingsdaten S1, ..., Sm und G
+		- Verwendung eines Meta-Lerners zum Lernen von Gewichten w_e,Li für jedes Element e des Mediated Schema und jeden Lerners Li
+		- p_e(e') als Summe der Vorhersagen aller Lerner für Element e des Mediated Schemas für Element e' einer Quelle
+	-> Abbildung auf generische Architektur des Schema-Matching
+		- Lerner = Matcher, Meta-Lerner = Combiner
+		- Verwendung von Techniken des maschinellen Lernens zur Ermöglichung der Verwendung vorheriger Erfahrungen durch Matching
+* Many-to-Many-Matching:
+	-> Unendlicher Suchraum für Matches ale Kombinationen von Spalten
+		- Kontrolle der Suche als größte Herausforderung
+	-> Spezialisierte Sucher
+		- Textsucher für Zusammensetzung von Spalten
+		- Numerische Sucher für arithmetische Ausdrücke
+		- Datumssucher zur Kombination von Tag/Monat/Jahr
+	-> Auswertung von Match-Kandidaten mittels Vergleich mit Lernmodellen, Statistiken auf Dateninstanzen und typischen Heuristiken
+	-> Begrenzung der Suche mittels Beam-Search
+		- Prüfung der ersten k Kandidaten auf jeder Ebene der Suche
+		- Terminierung mittels abnehmender Rückgabe (Abschätzung der Qualität ändert nicht viel zwischen Iterationen)

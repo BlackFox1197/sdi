@@ -1,0 +1,93 @@
+##### Notizen - Kapitel 1: Intro #####
+
+* Einführung:
+	-> Definition und Pflege der eigenen Daten in jeder Applikation (Datei-Daten-Management)
+	-> Neue Anforderungen durch zentralisiertes Daten-Management
+		- Unterstützung dezentralisierter Organisationsstrukturen
+		- Hohe Verfügbarkeit und Performance sowie Skalierbarkeit
+	-> Datenbank (DB) als organisierte Sammlung relationierter Datren
+	-> Datenbank-Managementsystem (DBMS) als Software-System für allgemeinen Zweck
+		- zur Erleichterung der Prozesse des Definierens, Konstruierens, Manipulierens und Teilen von DBs über verschiedene Benutzer und Anwendungen
+	-> Datenbank-System (DBS) = DB + DBMS
+	-> Architektur
+		- Anwendung greift auf Datenbank unter Verwendung spezifischer Views (Externes Schema) zu
+		- DBMS stellt Zugriff für alle Anwendungen unter Verwendung des gleichen logischen Schemas bereit
+		- Speicherung der Datenbank in Sekundärspeicher gemäß eines internen Schemas
+	-> Relationales Modell (Datenbank) als strukturierte Datenbank bestehend aus einer Reihe von Relationen
+		- Relationales Schema R als R(A1, A2, ..., An) mit R als Relationsnamen, Ai`s als Reihe von Attributen (Grad der Relation = |A|)
+		- r(R) als Reihe von n-Tupeln r={t1, t2,..., tm} mit Kardinalität = |r|
+	-> Verteiltes Daten-Management
+		- Verteiltes Computer-System als Sammlung autonomer verarbeitender Element verbunden mittels Computernetzwerk
+		- Kooperation der Elemente zur Durchführung zugewiesener Aufgaben
+		- Verteilung als breiter Begriff mit vom Kontext abhängiger Bedeutung (z. B. Verarbeitungslogik, Funktionen, Daten, Kontrolle, etc.)
+		- Verteilung aufgrund von Natur aus verteilter heutiger Anwendungen und Organisationsstrukturen weit verteilter Unternehmen
+	-> Verteilte Datenbanken (DDB) als Sammlung mehrerer, logisch miteinander verbundenen und über ein Computernetzwerk verteilten Datenbanken
+		- DDBS = DDB + DDBMS
+		- Annahmen
+			# Speicherung von Daten auf einer Anzahl von Seiten, wo jede Seite logisch auf einem Prozessor besteht
+			# Prozessoren verschiedener Seiten sind über Computernetzwerk miteinander verbunden
+			# DDB als Datenbank und nicht als Sammlung von Dateien
+			# Daten logisch verknüpft und in mehrere Dateien strukturiert mit Zugriff über gemeinsame Schnittstelle
+			# DDBMS als Sammlung von DBMSs
+		- Klassifizierung des architekturellen Modells für DDBSs über Dimensionen der Autonome, Verteilung und Heterogenität
+			# Autnomie als Verteilung der Kontrolle (nicht Daten) bzw. Grad der unabhängigen Arbeit einzelner DBMSs
+			# Physikalische Verteilung über mehrere Seiten
+			# Heterogenität einzelner Komponenten auf verschiedenen Ebenen (z. B.: Hardware, Betriebssystem, Kommunikation, Datenbanken)
+* Prinzipien der Datenintegration:
+	-> Kopplung verschiedener Quellen kontrolliert von mehreren Personen unter einem gemeinsamen Schema
+	-> Unabhängigkeit von Quelle und Standort, Datenmodell und Syntax sowie semantischer Unterschiede, etc.
+	-> Modell:		Anfrage -> Mediated Schema -> Semantisches Mapping -> Quellen (S1, S2, S3, ...)
+* Wichtigkeit der Datenintegration:
+	-> Wirtschaft		- Enterprise-Modelle (CRM, ERP, Portale, ...)
+	-> Wissenschaft		- z. B.: Gen-Ontologien, Biodiversitäts-Forschungen, iDiv
+	-> Web				- Millionen hoch-qualitativer HTML-Formulare mit eigenen Schnittstellen
+						- Erzeugung einer einzigen Schnittstelle für Vielzahl von Quellen des Deep-Webs
+	-> Regierung, etc.
+	-> Datenintegration als Prozess der Konsolidation von Daten über Reihe heterogener Datenquellen zu einer einzigen einheitlichen Reihe oder Ansicht der Daten
+	-> Anforderungen integrierter Datensätze
+		- Korrektheit und Vollständigkeit der Repräsentation des Inhalts über alle Datenquellen
+		- Verwendung eines einzigen Datenmodells und eines einzigen Schemas
+		- Enthält eine einzige Repräsentation für jede Echtwelt-Entität
+		- Keine widersprüchlichen Daten über einzelne Entitäten
+	-> Auflösung verschiedener Arten von Heterogenitäten zwischen Datenquellen
+* Ziele der Datenintegration:
+	-> Einheitlicher Anfrage-Zugriff über Reihe von Datenquellen
+	-> Skalierbarkeit über Quellen
+	-> Heterogenität
+	-> Autonomie
+	-> Halb-Strukturierbarkeit
+	-> Schweres Problem aufgrund
+		- Gründe auf System-Ebene (Verwaltung verschiedener Plattformen, SQL über mehrere Systeme nicht einfach, Verteilte Anfrage-Verarbeitung)
+		- Logische Gründe (Schema- und Daten-Heterogenität)
+		- Soziale Gründe (Lokalisierung und Erfassung relevanter Daten im Unternehmen, Überzeugung der Leute zum Teilen -> Sicherheit, Privatsphäre, Performance)
+* Architektur der Datenintegration
+	-> Ansatz der physischen Datenintegration (Warehousing)
+		- Periodisches Laden aller Daten in eine zentrale Datenbank (Warehouse)
+		- Gute Performance, mit nicht immer frischen Daten
+		- Benötigung von Reinigung bzw. Putzen der Daten
+		- Architektur:
+							Query
+							  |
+						 Repository<----. Datenreinigung/-putzen
+		Datenextraktion	 |	  |	  		|
+					  Quelle Quelle	 Quelle
+	-> Ansatz der virtuellen Datenintegration (Mediated Schema)
+		- Daten bleiben in lokalen Quellen
+		- Entscheidung der relevanten Quellen für Anfrage, sobald diese hineinkommt
+		- Herunterbrechen der Anfrage in Unteranfragen für einzelne Quellen
+		- Erhaltung der Antworten von Quellen mit passender Verknüpfung
+		- Frische Daten
+		- Architektur:
+								Query			--
+								  |				  | Mediated
+								  |				  | Schema
+					--	Reformulierungs-Motor   --							Mediator zum Herunterbrechen der Anfrage in Unteranfragen für Quellen
+		Mediator:  |		Optimierer
+					--	Ausführungs-Motor		<--> Datenquellen-Katalog	Meta-Informationen der Quellen (Inhalte, Anfrageunterstützung, etc.)
+						|		|		|
+					Wrapper	 Wrapper  Wrapper								Wrapper zur Kommunikation mit Datenquelle und Ausführung von Formatübersetzungen
+						|		|		|									Erhaltung der Antwort in passendem Format
+					 Quelle	  Quelle  Quelle
+	-> Gegenüberstellung beider Ansätze
+		- Virtuelle Datenintegration: Keine Sammlung der Daten offline; Sammlung und Verarbeitung der Daten verschiedener Quellen zur Laufzeit
+		- Data Warehouse: Sammlung der Daten offline mit Speicherung in zentralem Repository; Ausführung von Anfragen auf Repository
