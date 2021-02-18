@@ -38,7 +38,39 @@
 	* Computing of similarity measure by using the following equation:
 		- J(x,y) = |B_x \cap B_y| / |B_x \cup B_y|
 	* Example:
-		- B_x = {##o}
+		- B_x = {#o, or, rd, de, er, rN, Nu, um, mb, be, r#}
+		- B_y = {#o, or, rd, de, er, rC, Co, od, e#}
+		- J(x,y) = 5 / 15 = 0.3333333333333333
+~ Slide 5 - Combining match predictions:
+	* Simplest form of combining via returning average, minimum or maximum of scores from each matcher
+	* Example:
+		- Given the measures of all three matchers for x and y
+			# s(x,y) = 0.54545454545
+			# jaro(x,y) = 0.7095959595959596
+			# J(x,y) = 0.3333333333333333
+		- Combining via minimum combination strategy will output 0.3333333333333333
+		- Combining via maximum combination strategy will output 0.7095959595959596
+		- Combining via average combination strategy will output 0.5294612794586532
+~ Slide 6 - Match selection by tresholding:
+	* Tresholding as simplest strategy to choose matches
+	* All pairs with score not less than tresholds are matches
+	* Exmaple:
+		- Using treshold 0.3 will output (x,y) as match for all combining strategies
+		- Using treshold 0.5 will output (x,y) as match for average and maximum combining strategies
+		- Using treshold 0.3 will output (x,y) as match only for maximum combining strategy
+~ Slide 7 - Evaluation of semantic matching
+	* Applying all three combination strategies with tresholds 0.3, 0.5 and 0.7 results in 9 different match-results
+	* Comparing of this results with manually created solution pattern
+	* Defining of true positive (TP), false positive (FP), true negative (TN) and false negative (FN) matches for each result
+		- Matches of attribute pairs in both pattern as true positive und missmatches in both aus true negative
+		- Matches in solution pattern and missmatch in selection result as false negative
+		- Mismatches in solution paatern and match in selection result as false positive
+	* Computing precision by using the following equation:
+		- precision = TP / (TP + FP)
+	* Computing recall by using the following equation:
+		- recall = TP / (TP + FN)
+~ Slide 8 - Results:
+	+ table of results +
 
 ~ Problem definition:
 	* Requirement of schema mapping to referring tables and elements between our mediated schema and our two datasources for source descriptions
@@ -47,7 +79,7 @@
 		+++ showing examples of our scenario +++
 	* Challenge to reconciling heterogenities with good accuracy and scalability
 	* We will focus on 1-to-1-Matches by applying string matchers like Edit-Distance-, Jaro- and Jaccard-Measures
-		# Combinding by Minimum, Maximum and Average and selecting by different tresholds (0.3, 0.5, 0.7) to measure the accuracy of our algorithms
+		# combining by Minimum, Maximum and Average and selecting by different tresholds (0.3, 0.5, 0.7) to measure the accuracy of our algorithms
 ~ Applying Matchers:
 	* Edit-Distance as sequence-based matcher
 	* Goal of sequence-based matcher is to comparing two strings to find pairs which refer the same real-world-entity
@@ -69,9 +101,9 @@
 		# applying following equation for computation of the measure
 		+++ computation of example +++
 ~ Combining techniques:
-	* simplest form of combinding via returning average, minimum or maximum of scores from each matcher
+	* Simplest form of combining via returning average, minimum or maximum of scores from each matcher
 		+++ slide 1: part of similarity results from measures +++
-		+++ slide 2: combinding them via one techniques +++
+		+++ slide 2: combining them via one techniques +++
 ~ Match Selection:
 	* tresholding as simplest strategy to choose matches
 	* all pairs with score not less than tresholds are matches
