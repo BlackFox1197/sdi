@@ -70,7 +70,16 @@
 	* Computing recall by using the following equation:
 		- recall = TP / (TP + FN)
 ~ Slide 8 - Results:
-	+ table of results +
+								TP		TN		FN		FP		Recall					Precision
+Min-Comb. with treshold 0.3		9		453		27		85		0.09574468085106383		0.25
+Min-Comb. with treshold 0.5		4		470		32		68		0.05555555555555555		0.1111111111111111
+Min-Comb. with treshold 0.7		0		538		36		0		0						0.0
+Max-Comb. with treshold 0.3		36		0		0		538		0.0627177700348432		1.0
+Max-Comb. with treshold 0.5		36		0		0		538		0.0627177700348432		1.0
+Max-Comb. with treshold 0.7		32		24		4		514		0.05860805860805861		0.8888888888888888
+Avg-Comb. with treshold 0.3		36		4		0		534		0.06315789473684211		1.0
+Avg-Comb. with treshold 0.5		21		393		15		145		0.12650602409638553		0.5833333333333334
+Avg-Comb. with treshold 0.7		0		538		36		0		0						0.0
 
 ~ Problem definition:
 	* Requirement of schema mapping to referring tables and elements between our mediated schema and our two datasources for source descriptions
