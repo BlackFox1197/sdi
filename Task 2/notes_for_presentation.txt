@@ -1,5 +1,45 @@
 # Task 2 - Schema-Matching:
 
+~ Slide 1 - Problem definition:
+	* Creating source descriptions requires schema mapping to refer tables and their attributes between mediated schema and datasources
+	* Using of semantic matches for elaboration inteo schema mapping
+	* Three types of matches
+		- One-to-one matches	e. g. BEISPIEL AUS PROJEKT EINFÜGEN
+		- One-to-many matches	e. g. BEISPIEL AUS PROJEKT EINFÜGEN
+		- Many-to-many matches	no example in our scenario
+	* Challenge of reconciling heterogenities with good accuracy and high scalability
+~ Slide 2 - Edit-Distance-Matcher:
+	* Sequence-based matcher which compares two strings to find pairs which refer the same real-world-entity
+	* Computing minimal cost for transformation of string x to string y by the function d(x,y) as distance between two strings
+		- Transformations are deleting, inserting and substituting of single characters
+		- Equal costs of 1 for every operation of transformation
+		- Smaller values for higher similarity
+	* Example:
+		- x = "orderNumber" (from mediated schema) and y = "orderCode" (from Source 1)
+		- d(x,y) = 6
+	* Converting distance measure into similarity measure by using the following equation:
+		- s(x,y) = 1 - d(x,y) / [max(length(x), length(y))]
+	* Example:
+		- s(x,y) = 1 - 6 / 11 = 0.54545454545
+~ Slide 3 - Jaro-Matcher:
+	* Sequence-based matcher which finds commen characters and their position in both strings
+	* Common characters whitout same position marked as transposition
+	* Computing of similarity measure by using the following equation:
+		- jaro(x,y) = 1 / 3[c/|x| + c/|y| + (c – t/2)/c]
+		- c as total number of common characters and t as total number of transpositions
+	* Example:
+		- x and y same as in previous slide 
+		- c = 6 and t = 1
+		- jaro(x,y) = 1 / 3 * (6 / 11 + 6 / 9 + (6 - 1 / 2) / 6) = 0.7095959595959596
+~ Slide 4 - Jaccard-Matcher:
+	* Set-based matcher which tokenize strings in a set of tokens
+	* B_x as set of generated tokens for x
+	* B_y as set of generated tokens for y
+	* Computing of similarity measure by using the following equation:
+		- J(x,y) = |B_x \cap B_y| / |B_x \cup B_y|
+	* Example:
+		- B_x = {##o}
+
 ~ Problem definition:
 	* Requirement of schema mapping to referring tables and elements between our mediated schema and our two datasources for source descriptions
 	* Begin by computing of semantic matches to elaborate this matches into mappings
