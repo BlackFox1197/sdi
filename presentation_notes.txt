@@ -1,0 +1,22 @@
+##### Strukturierung der Projekt-Präsentation #####
+
+- Einleitung
+- Inhaltsverzeichnis
+- Task 1
+	* Erklärung formaler Idee
+	* Beschreibung der Datenquellen
+	* Schlussfolgerung des Mediated Schema
+		# Erklärung des Integrationsschemas
+		# Heterogenitäten
+- Task 2
+	* Erklärung des Schema-Matching-Problems
+	* Erklärung Edit-Distance, Jaro und Jaccard
+		# Anwendung dessen
+	* Erklärung des Kombinierens (Min, Max, Avg)
+		? Zeigen einer Ergebnismatrix
+	* Erklärung des Selektierens (Schwellwert-Verfahren)
+		# Präsentation einiger Ergebnisse
+	* Auswertung der Ergebnisse als Vergleich zu Musterlösung
+		# Tabelle für TF, FP sowie Recall und Precision
+- Task 3
+	? 
