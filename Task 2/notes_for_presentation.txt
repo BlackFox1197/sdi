@@ -1,0 +1,50 @@
+# Task 2 - Schema-Matching:
+
+~ Problem definition:
+	* Requirement of schema mapping to referring tables and elements between our mediated schema and our two datasources for source descriptions
+	* Begin by computing of semantic matches to elaborate this matches into mappings
+	* Existence of One-to-One-, One-to-Many- and Many-to-Many-Matches
+		+++ showing examples of our scenario +++
+	* Challenge to reconciling heterogenities with good accuracy and scalability
+	* We will focus on 1-to-1-Matches by applying string matchers like Edit-Distance-, Jaro- and Jaccard-Measures
+		# Combinding by Minimum, Maximum and Average and selecting by different tresholds (0.3, 0.5, 0.7) to measure the accuracy of our algorithms
+~ Applying Matchers:
+	* Edit-Distance as sequence-based matcher
+	* Goal of sequence-based matcher is to comparing two strings to find pairs which refer the same real-world-entity
+	* Computing minimal cost of transforming x into y with function d(x,y)
+		# each transformation costs 1 (delete, insert and substitute of characters)
+		# distance measure with smaller values for higher similarity
+		+++ Two examples of our project +++
+	* Converting from distance measure to similarity measure by applying following computation
+		# measure in range from [0,1] with higher values for higher similarity
+		+++ showing extension of example +++
+	* Jaro-Measure also as sequence-based matcher
+		# finding common characters and their positions
+		# common characters without same position marked as transposition
+		# computing with following equation
+		+++ showing on example +++
+	* Jaccard-Measure as set-based matcher
+		# tokenization of strings via set-based-matcher
+		+++ generation of tokens with one example +++
+		# applying following equation for computation of the measure
+		+++ computation of example +++
+~ Combining techniques:
+	* simplest form of combinding via returning average, minimum or maximum of scores from each matcher
+		+++ slide 1: part of similarity results from measures +++
+		+++ slide 2: combinding them via one techniques +++
+~ Match Selection:
+	* tresholding as simplest strategy to choose matches
+	* all pairs with score not less than tresholds are matches
+		+++ showing some results +++
+~ Evaluation of results:
+	* Creating right solution as pattern for comparing with selection results
+	* Defining matches of attribute pairs in both pattern as true positive und missmatches in both aus true negative
+	* Matches in solution pattern and missmatch in selection result as false negative
+	* Mismachtes in solution paatern and match in selection result as false positive
+		+++ showing all statistics +++
+	* For better expressiveness computation of recall and precision with following equations
+	* Recall is ...
+	* Precision is ...
+		+++ showing recall + precision statistics +++
+	* Showing some observation
+		- More input when slides are ready -
