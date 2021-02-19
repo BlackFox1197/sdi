@@ -129,3 +129,9 @@ Avg-Comb. with treshold 0.7		0		538		36		0		0						0.0
 		+++ showing recall + precision statistics +++
 	* Showing some observation
 		- More input when slides are ready -
+
+
+Table S1.StoneOvenPizza(SOPID, PizzaName, nurishment, total) with tuples x and table S2.Pizza(PID, title, nurishment, price) with tuples y
+mediated as Pizza(PID, pizzaName, nutrition, price)
+
+sim(x,y) = 0.5 * s_{PID}(x,y) + 0.2 * s_{pizzaName}(x,y) + 0.1 * s_{nutrition}(x,y) + 0.2 * s_{price}(x,y)
