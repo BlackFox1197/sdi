@@ -70,7 +70,7 @@
 	* Computing recall by using the following equation:
 		- recall = TP / (TP + FN)
 ~ Slide 8 - Results:
-								TP		TN		FN		FP		Recall					Precision
+					TP		TN		FN		FP		Recall				Precision
 Min-Comb. with treshold 0.3		9		453		27		85		0.09574468085106383		0.25
 Min-Comb. with treshold 0.5		4		470		32		68		0.05555555555555555		0.1111111111111111
 Min-Comb. with treshold 0.7		0		538		36		0		0						0.0

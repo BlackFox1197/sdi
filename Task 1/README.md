@@ -37,7 +37,7 @@ The description of all used datasources.
 * street, city, zip in Adress is adress in mediated
 
 
-# Homogenities
+# named Heterogenities
 ## S1 to mediated Schema:
 * StoneOvenPizza Class is Pizza Class in mediated 
 * Customer Class is User Class in medited
