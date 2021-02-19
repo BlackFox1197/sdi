@@ -6,7 +6,7 @@ The description of all used datasources.
 * Customer(CID, PIID, FirstName, LastName)
 * PaymentInfos(PIID, CreditCardNumber, ccv, expDate)
 * Order(OID, CID, orderCode, totalAmount, Adress)
-* OrderItem(PID, OID)
+* OrderItem(SOPID, OID)
 
 ## S2
 * Pizza(PID, title, nurishment, price)

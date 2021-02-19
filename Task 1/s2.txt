@@ -1,0 +1,5 @@
+Pizza(PID, title, nurishment, price); {(22, 'Pepperoni', 900, 10.99), (13, 'Funghini', 1100, 8.99)}
+User(UID, FirstName, LastName, CCNumber, ccv, expDate); {(10, 'Dan', 'Stanley', '4111-1111-1111-1111', 233, '12/21'), (33, 'Jutta', 'Kramer', '4111-1111-1111-1122', 243, '07/25')}
+Order(OID, UID, orderNumber, Sum, AID); {(151, 33, 134534, 90.99, 21), (25, 3, 341843, 50.80, 71)}
+InOrder(OID, PID); {(151, 22), (151, 13)}
+Adress(AID, UID, street, city, zip); {(71, 10, 'Bachgasse 10', 'Jena', 07743), (21, 33, 'Brunnenstraße 13', 'Jena', 07743)}

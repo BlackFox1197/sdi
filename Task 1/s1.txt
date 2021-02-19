@@ -1,0 +1,5 @@
+StoneOvenPizza(SOPID, PizzaName, nurishment, total); {(12, 'Salame', 900, 9.99), (1, 'Funghi', 1000, 8.99)}
+Customer(CID, PIID, FirstName, LastName); {(1, 23, 'Daniel', 'Stanley'), (3, 4, 'Jon', 'Biggs')}
+PaymentInfos(PIID, CreditCardNumber, ccv, expDate); {(23, '4111-1111-1111-1111', 233, '12/21'), (4, '4111-1121-1111-1111', 124, '11/24')}
+Order(OID, CID, orderCode, totalAmount, Adress); {(15, 1, 134234, 25.99, 'Krautgasse 12, 07743 Jena'), (45, 3, 345843, 50.80, 'Dornburger Str. 1, 07743 Jena')}
+OrderItem(SOPID, OID); {(12, 15), (1, 45)}
